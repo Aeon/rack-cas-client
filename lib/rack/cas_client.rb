@@ -56,7 +56,7 @@ module Rack
     end
     
     
-    class Client < Struct.new :app, :options
+    class Client < Struct.new "RackCasClientBase", :app, :options
       include SessionStore::FileSystem
       attr_reader :mem
       
