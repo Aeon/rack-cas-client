@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{rack-cas-client}
-  s.version = "0.1.5"
+  s.name = "rack-cas-client"
+  s.version = "0.1.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = [%q{Jerome Riga}]
-  s.date = %q{2012-08-16}
-  s.description = %q{Rack middleware that handles user authentication against a cas server}
-  s.email = %q{jriga@zemis.co.uk}
+  s.authors = ["Jerome Riga"]
+  s.date = "2013-08-02"
+  s.description = "Rack middleware that handles user authentication against a cas server"
+  s.email = "jriga@zemis.co.uk"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -32,11 +32,11 @@ Gem::Specification.new do |s|
     "spec/rack-cas-client_spec.rb",
     "spec/spec_helper.rb"
   ]
-  s.homepage = %q{http://github.com/zemis/rack-cas-client}
-  s.licenses = [%q{MIT}]
-  s.require_paths = [%q{lib}]
-  s.rubygems_version = %q{1.8.6}
-  s.summary = %q{Rack middleware for authentication with CAS server}
+  s.homepage = "http://github.com/zemis/rack-cas-client"
+  s.licenses = ["MIT"]
+  s.require_paths = ["lib"]
+  s.rubygems_version = "1.8.25"
+  s.summary = "Rack middleware for authentication with CAS server"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
