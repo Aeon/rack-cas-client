@@ -93,7 +93,7 @@ module Rack
           :proxy_url  => nil,
           :logout_url  => nil,
           :service_url  => nil,
-          :include_path_in_service_url => false,
+          :include_path_in_service_url => true,
           :proxy_callback_url  => nil,
           :proxy_retrieval_url => nil,
           :tmp_dir => nil
