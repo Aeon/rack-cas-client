@@ -80,10 +80,11 @@ module Rack
       end
 
       def config
+        default_logger = Rails.logger rescue ::Logger.new(STDOUT)
         @config ||= {
           :cas_base_url => nil,
           :cas_destination_logout_param_name  => nil,
-          :logger  => Rails.logger rescue ::Logger.new(STDOUT),
+          :logger  => default_logger,
           :username_session_key  => nil,
           :extra_attributes_session_key  => nil,
           :ticket_store  => nil,
