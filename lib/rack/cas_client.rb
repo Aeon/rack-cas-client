@@ -76,14 +76,14 @@ module Rack
       end
 
       def log
-        @logger ||= Rails.logger rescue ::Logger.new(STDOUT)
+        @logger ||= config[:logger]
       end
 
       def config
         @config ||= {
           :cas_base_url => nil,
           :cas_destination_logout_param_name  => nil,
-          :logger  => log,
+          :logger  => Rails.logger rescue ::Logger.new(STDOUT),
           :username_session_key  => nil,
           :extra_attributes_session_key  => nil,
           :ticket_store  => nil,
@@ -247,6 +247,7 @@ module Rack
         log.info("Ticket #{current_service_ticket.ticket.inspect} for service #{current_service_ticket.service.inspect} belonging to user #{cas_user.inspect} is VALID.")
         env['rack.cas.client.user'] = cas_user
         env['rack.cas.client.user_extra'] = cas_extra_attributes.dup
+        env['rack.cas.service_url'] = service_url(env)
 
         # TODO: remove ticket params from env
       
@@ -371,7 +372,7 @@ module Rack
 
         params = request.params.dup
         params.delete(:ticket)
-        url = URI.const_get(request.scheme.upcase).build(:host => request.host, :port => request.port, :path => request.path, :query => request.query_string)
+        url = URI.const_get(request.scheme.upcase).build(:host => request.host, :port => request.port, :path => request.path)
         @service_url = url.to_s
         log.debug("Guessed service url: #{@service_url}")
         @service_url
