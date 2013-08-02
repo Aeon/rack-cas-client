@@ -93,6 +93,7 @@ module Rack
           :proxy_url  => nil,
           :logout_url  => nil,
           :service_url  => nil,
+          :include_path_in_service_url => false,
           :proxy_callback_url  => nil,
           :proxy_retrieval_url => nil,
           :tmp_dir => nil
@@ -373,7 +374,10 @@ module Rack
 
         params = request.params.dup
         params.delete(:ticket)
-        url = URI.const_get(request.scheme.upcase).build(:host => request.host, :port => request.port, :path => request.path)
+
+        uri_parts = {:host => request.host, :port => request.port}
+        uri_parts[:path] = request.path if config[:include_path_in_service_url]
+        url = URI.const_get(request.scheme.upcase).build(uri_parts)
         @service_url = url.to_s
         log.debug("Guessed service url: #{@service_url}")
         @service_url
