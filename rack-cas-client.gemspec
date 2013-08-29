@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "rack-cas-client"
-  s.version = "0.1.6"
+  s.version = "0.1.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jerome Riga"]
-  s.date = "2013-08-02"
+  s.date = "2013-08-29"
   s.description = "Rack middleware that handles user authentication against a cas server"
   s.email = "jriga@zemis.co.uk"
   s.extra_rdoc_files = [
