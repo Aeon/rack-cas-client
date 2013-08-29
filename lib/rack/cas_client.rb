@@ -259,6 +259,7 @@ module Rack
         # only modify the session when it's a new_session
         if new_session
           session = request.session
+          current_service_ticket.extra_attributes = {} # extra_attributes are too big to stuff into session!
           session['cas'] = {'last_valid_ticket' => current_service_ticket, 'filteruser' => cas_user, 'username_session_key' => cas_user}
 
           if config[:enable_single_sign_out]
