@@ -347,7 +347,7 @@ module Rack
         @mem['previous_redirect']
       end
       def previous_redirect_to_cas=(value)
-        @mem['cas']['previous_redirect'] = value
+        @mem['previous_redirect'] = value
       end
       def validation_retry
         @mem['validation_retry'] || 0
