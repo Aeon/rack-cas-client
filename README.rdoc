@@ -56,3 +56,8 @@ run app
 Copyright (c) 2011 Jerome Riga. See LICENSE.txt for
 further details.
 
+== Contributors
+
+* Phillip Aldridge
+* Brian Moelk
+* Anton Stroganov
