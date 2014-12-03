@@ -171,19 +171,21 @@ module Rack
         user = nil
         user_extra = nil
         new_session = true
-        
-        case check_service_ticket(env)
-        when :identical
-          log.warn("Re-using previously validated ticket since the ticket id and service are the same.")
-          new_session = false
-          current_service_ticket = last_service_ticket
+
+        if last_service_ticket && last_service_ticket.is_valid?
+          case check_service_ticket(env)
+          when :identical
+            log.warn("Re-using previously validated ticket since the ticket id and service are the same.")
+            new_session = false
+            current_service_ticket = last_service_ticket
+          when :different
+            log.debug "Existing local CAS session detected for #{client_username_session_key.inspect}. "+"Previous ticket #{last_service_ticket.ticket.inspect} will be re-used."
+            new_session = false
+            current_service_ticket = last_service_ticket
+          end
+        end
           
-        when :different
-          log.debug "Existing local CAS session detected for #{client_username_session_key.inspect}. "+"Previous ticket #{last_service_ticket.ticket.inspect} will be re-used."
-          new_session = false
-          current_service_ticket = last_service_ticket
-          
-        else
+        unless current_service_ticket
           log.debug("New session!")
           current_service_ticket = service_ticket(env)
         end
@@ -205,7 +207,6 @@ module Rack
 
             return [env, request, new_session, current_service_ticket]
           else
-            
             log.warn("Ticket #{current_service_ticket.ticket.inspect} failed validation -- #{vr.failure_code}: #{vr.failure_message}")
             return false
           end
